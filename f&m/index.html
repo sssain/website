@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="../css/uikit.min.css">
+    <script src="../js/uikit.min.js"></script>
+    <script src="../js/uikit-icons.min.js"></script>
+    <style>
+        a {
+            color: black;
+            text-decoration: underline;
+            transition: ease-in-out, 0.3s;
+        }   
+
+        a:hover {
+            color: white;
+            padding: 0.5%;
+            text-decoration: none;
+            background-color: black;
+        }
+    </style>
+    <title>Frames & Motion - Naufal Zaqie</title>
+</head>
+<body>
+<div class="uk-flex uk-flex-center uk-padding uk-margin-auto uk-margin-large-top">
+    <div>
+    <h1 style="font-family: 'Noto Serif'; font-weight: 600;">Frames & Motion</h1>
+    <a href="../">Back to Home</a>
+    
+    </div>
+
+    
+        
+</div>
+<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow>
+
+    <div class="uk-slideshow-items">
+        <div>
+            <img src="frames/soj1.jpg" alt="" uk-cover>
+        </div>
+        <div>
+            <img src="frames/soj2.jpg" alt="" uk-cover>
+        </div>
+        <div>
+            <img src="frames/soj3.jpg" alt="" uk-cover>
+        </div>
+        <div>
+            <img src="frames/beach.jpg" alt="" uk-cover>
+        </div>
+    </div>
+
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href uk-slidenav-previous uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href uk-slidenav-next uk-slideshow-item="next"></a>
+
+</div>  
+</body>
+</html>
