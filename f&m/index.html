@@ -29,59 +29,133 @@ a:hover {
 p, a {
     font-family: 'Inconsolata', monospace;
 }
+
+#preloader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.25rem;
+      font-family: sans-serif;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.6s ease; /* fade effect */
+    }
+    #preloader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+
+    }
+
+        /* Hide content initially */
+    #content {
+      opacity: 0;
+      transition: opacity 0.8s ease; /* fade in */
+    }
+
+    /* Show content with fade */
+    #content.fade-in {
+      opacity: 1;
+    }
     </style>
     <title>the eyes</title>
 </head>
 <body>
-<div class="uk-flex uk-flex-center uk-padding uk-margin-auto uk-margin-large-top">
-    <div>
-    <p class="uk-text-emphasis">the frames and motion</p><a href="../">back to home</a>
-    
+    <!-- preload -->
+<div id="preloader">
+    <div id="loading">
+      <p class="uk-text-emphasis uk-position-center">please wait<span id="dots"></span></p>
     </div>
+  </div>
 
-    
+<div id="content">
+    <div class="uk-flex uk-flex-center uk-padding uk-margin-auto uk-margin-large-top">
+        <div>
+        <p class="uk-text-emphasis">the frames and motion</p><a href="../">back to home</a>
         
-</div>
-<div class="uk-position-relative uk-margin-auto uk-visible-toggle uk-light" style="max-width: 1000px;" tabindex="-1" uk-slideshow>
+        </div>
 
-    <div class="uk-slideshow-items">
-        <div>
-            <img src="frames/soj1.jpg" alt="" uk-cover>
-        </div>
-        <div>
-            <img src="frames/soj2.jpg" alt="" uk-cover>
-        </div>
-        <div>
-            <img src="frames/soj3.jpg" alt="" uk-cover>
-        </div>
-        <div>
-            <img src="frames/beach.jpg" alt="" uk-cover>
-        </div>
-        <div>
-            <a href="https://www.youtube.com/watch?v=aNN3CTgMy38" title='Frames from "Sepia"'>
-            <img src="frames/sepia.png" alt="" uk-cover>
-            </a>
-        </div>
-        <div>
-            <a href="https://www.youtube.com/watch?v=2a6Q6n4gmcs" title='Frames from "Setengah Empat di Sudirman"'>
-            <img src="frames/seds.png" alt="" uk-cover>
-            </a>
-        </div>
-        <div>
-            <a href="https://www.youtube.com/watch?v=UDIOEG-XMdY" title='Frames from "School Trip"'>
-            <img src="frames/schooltrip.png" alt="" uk-cover>
-            </a>
-        </div>
-        <div>
-            <a href="https://www.youtube.com/watch?v=4_3z2xAmXPY" title='Frames from "Pemanasan Global"'>
-            <img src="frames/pemanasanglobal.png" alt="" uk-cover>
-            </a>
-        </div>
+        
+            
     </div>
+    <div class="uk-position-relative uk-margin-auto uk-visible-toggle uk-light" style="max-width: 1000px;" tabindex="-1" uk-slideshow>
 
-    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href uk-slidenav-previous uk-slideshow-item="previous"></a>
-    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href uk-slidenav-next uk-slideshow-item="next"></a>
+        <div class="uk-slideshow-items">
+            <div>
+                <img src="frames/soj1.jpg" alt="" uk-cover>
+            </div>
+            <div>
+                <img src="frames/soj2.jpg" alt="" uk-cover>
+            </div>
+            <div>
+                <img src="frames/soj3.jpg" alt="" uk-cover>
+            </div>
+            <div>
+                <img src="frames/beach.jpg" alt="" uk-cover>
+            </div>
+            <div>
+                <a href="https://www.youtube.com/watch?v=aNN3CTgMy38" title='Frames from "Sepia"'>
+                <img src="frames/sepia.png" alt="" uk-cover>
+                </a>
+            </div>
+            <div>
+                <a href="https://www.youtube.com/watch?v=2a6Q6n4gmcs" title='Frames from "Setengah Empat di Sudirman"'>
+                <img src="frames/seds.png" alt="" uk-cover>
+                </a>
+            </div>
+            <div>
+                <a href="https://www.youtube.com/watch?v=UDIOEG-XMdY" title='Frames from "School Trip"'>
+                <img src="frames/schooltrip.png" alt="" uk-cover>
+                </a>
+            </div>
+            <div>
+                <a href="https://www.youtube.com/watch?v=4_3z2xAmXPY" title='Frames from "Pemanasan Global"'>
+                <img src="frames/pemanasanglobal.png" alt="" uk-cover>
+                </a>
+            </div>
+        </div>
 
-</div>  
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href uk-slidenav-previous uk-slideshow-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href uk-slidenav-next uk-slideshow-item="next"></a>
+
+    </div>  
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dots = document.getElementById("dots");
+      const preloader = document.getElementById("preloader");
+      const content = document.getElementById("content");
+
+      // Animate dots
+      let count = 0;
+      setInterval(() => {
+        count = (count + 1) % 4;
+        dots.textContent = ".".repeat(count);
+      }, 500);
+
+      // Minimum preloader time (2s)
+      const minTime = 2000;
+      const startTime = Date.now();
+
+      window.addEventListener("load", () => {
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, minTime - elapsed);
+
+        setTimeout(() => {
+          preloader.classList.add("fade-out");
+
+          // Wait for preloader fade to finish
+          setTimeout(() => {
+            preloader.style.display = "none";
+            content.classList.add("fade-in"); // trigger content fade-in
+          }, 600); // match preloader transition
+        }, remaining);
+      });
+    });
+
+</script>
 </body>
 </html>
